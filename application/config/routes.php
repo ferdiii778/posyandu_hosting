@@ -52,10 +52,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-<<<<<<< HEAD
 
 // API Informasi
 $route['api/informasi']['GET'] = 'api/informasi/index';
 $route['api/informasi/(:num)']['GET'] = 'api/informasi/detail/$1';
-=======
->>>>>>> 998e12ecbed81109a03396f789cd97034c9f4201
+
