@@ -1,17 +1,17 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Informasi extends CI_Controller {
+class Chat extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('Minformasi');
+        $this->load->model('Mchat');
         header('Content-Type: application/json');
     }
 
-    // GET semua informasi
+    // GET semua chat
     public function index() {
-        $data = $this->Minformasi->getAll();
+        $data = $this->Mchat->getAll();
 
         echo json_encode([
             'status' => true,
@@ -19,9 +19,9 @@ class Informasi extends CI_Controller {
         ]);
     }
 
-    // GET informasi by ID
+    // GET chat by ID
     public function detail($id) {
-        $data = $this->Minformasi->getById($id);
+        $data = $this->Mchat->getById($id);
 
         if ($data) {
             echo json_encode([
@@ -31,7 +31,7 @@ class Informasi extends CI_Controller {
         } else {
             echo json_encode([
                 'status' => false,
-                'message' => 'Data informasi tidak ditemukan'
+                'message' => 'Data tidak ditemukan'
             ]);
         }
     }

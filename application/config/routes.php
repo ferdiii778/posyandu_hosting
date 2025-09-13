@@ -53,7 +53,101 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-// API Informasi
+// Api Chat
+$route['api/chat']['GET'] = 'api/chat/index';
+$route['api/chat/(:num)']['GET'] = 'api/chat/detail/$1';
+
+// Api Balita
+$route['api/balita']['GET'] = 'api/balita/index';
+$route['api/balita/(:any)']['GET'] = 'api/balita/detail/$1';
+
+// Api Informasi
 $route['api/informasi']['GET'] = 'api/informasi/index';
 $route['api/informasi/(:num)']['GET'] = 'api/informasi/detail/$1';
 
+// Api Jadwal
+$route['api/jadwal']['GET'] = 'api/jadwal/index';
+$route['api/jadwal/(:num)']['GET'] = 'api/jadwal/detail/$1';
+
+// Api imunisasi
+$route['api/imunisasi']['GET'] = 'api/imunisasi/index';
+$route['api/imunisasi/(:num)']['GET'] = 'api/imunisasi/detail/$1';
+
+// Api Vitamin
+$route['api/vitamin']['GET'] = 'api/vitamin/index';
+$route['api/vitamin/(:num)']['GET'] = 'api/vitamin/detail/$1';
+
+// Api Kematian
+$route['api/kematian']['GET'] = 'api/kematian/index';
+$route['api/kematian/(:num)']['GET'] = 'api/kematian/detail/$1';
+
+// Api konsultasi
+$route['api/konsultasi']['GET'] = 'api/konsultasi/index';
+$route['api/konsultasi/(:num)']['GET'] = 'api/konsultasi/detail/$1';
+
+// Api Orang Tua
+$route['api/orangtua']['GET'] = 'api/orangtua/index';
+$route['api/orangtua/(:num)']['GET'] = 'api/orangtua/detail/$1';
+
+// Api Ortu Bayi
+$route['api/ortu-bayi']['GET'] = 'api/ortubayi/index';
+$route['api/ortu-bayi/(:num)']['GET'] = 'api/ortubayi/detail/$1';
+
+// Api Pemeriksaan
+$route['api/pemeriksaan']['GET'] = 'api/pemeriksaan/index';
+$route['api/pemeriksaan/(:any)']['GET'] = 'api/pemeriksaan/detail/$1';
+
+// Api Berat Badan Menurut Umur Laki
+$route['api/ref-bb-u-laki']['GET'] = 'api/bbulaki/index';
+$route['api/ref-bb-u-laki/(:num)']['GET'] = 'api/bbulaki/detail/$1';
+
+// Api Berat Badan Menurut Umur Perempuan
+$route['api/ref-bb-u-perempuan']['GET'] = 'api/bbuperempuan/index';
+$route['api/ref-bb-u-perempuan/(:num)']['GET'] = 'api/bbuperempuan/detail/$1';
+
+// Api Panjang Badan Menurut Umur laki
+$route['api/ref-pb-u-laki']['GET'] = 'api/pbulaki/index';
+$route['api/ref-pb-u-laki/(:num)']['GET'] = 'api/pbulaki/detail/$1';
+
+// Api Panjang Badan Menurut Umur perempuan
+$route['api/ref-pb-u-perempuan']['GET'] = 'api/pbuperempuan/index';
+$route['api/ref-pb-u-perempuan/(:num)']['GET'] = 'api/pbuperempuan/detail/$1';
+
+// Api Standarbbp Laki
+$route['api/ref-standar-bb-pb-laki']['GET'] = 'api/standarbbpblaki/index';
+$route['api/ref-standar-bb-pb-laki/(:num)']['GET'] = 'api/standarbbpblaki/detail/$1';
+
+// Api Standarbbp Perempuan
+$route['api/ref-standar-bb-pb-perempuan']['GET'] = 'api/standarbbpbperempuan/index';
+$route['api/ref-standar-bb-pb-perempuan/(:num)']['GET'] = 'api/standarbbpbperempuan/detail/$1';
+
+// Api Standarbbp2460 Laki
+$route['api/ref-standar-bb-pb-24-60-laki']['GET'] = 'api/standarbbpb2460laki/index';
+$route['api/ref-standar-bb-pb-24-60-laki/(:num)']['GET'] = 'api/standarbbpb2460laki/detail/$1';
+
+// Api Standarbbp2460 Perempuan
+$route['api/ref-standar-bb-pb-24-60-perempuan']['GET'] = 'api/standarbbpb2460perempuan/index';
+$route['api/ref-standar-bb-pb-24-60-perempuan/(:num)']['GET'] = 'api/standarbbpb2460perempuan/detail/$1';
+
+// Api Mstandarimtu024laki
+$route['api/ref-standar-imt-u-0-24-laki']['GET'] = 'api/standarimtu024laki/index';
+$route['api/ref-standar-imt-u-0-24-laki/(:num)']['GET'] = 'api/standarimtu024laki/detail/$1';
+
+// Api standarimtu024perempuan
+$route['api/ref-standar-imt-u-0-24-perempuan']['GET'] = 'api/standarimtu024perempuan/index';
+$route['api/ref-standar-imt-u-0-24-perempuan/(:num)']['GET'] = 'api/standarimtu024perempuan/detail/$1';
+
+// Api standarimtu518laki
+$route['api/ref-standar-imt-u-5-18-laki']['GET'] = 'api/standarimtu518laki/index';
+$route['api/ref-standar-imt-u-5-18-laki/(:num)']['GET'] = 'api/standarimtu518laki/detail/$1';
+
+// Api standarimtu518perempuan
+$route['api/ref-standar-imt-u-5-18-perempuan']['GET'] = 'api/standarimtu518perempuan/index';
+$route['api/ref-standar-imt-u-5-18-perempuan/(:num)']['GET'] = 'api/standarimtu518perempuan/detail/$1';
+
+// Api User Auth
+$route['api/user']['GET'] = 'api/user/index';
+$route['api/user/(:num)']['GET'] = 'api/user/detail/$1';
+$route['api/user']['POST'] = 'api/user/create';
+$route['api/user/(:num)']['PUT'] = 'api/user/update/$1';
+$route['api/user/(:num)']['DELETE'] = 'api/user/delete/$1';

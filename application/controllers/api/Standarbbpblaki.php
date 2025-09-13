@@ -1,17 +1,17 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Informasi extends CI_Controller {
+class Standarbbpblaki extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('Minformasi');
+        $this->load->model('Mstandarbbpblaki');
         header('Content-Type: application/json');
     }
 
-    // GET semua informasi
+    // GET semua data standar BB/PB Laki 0-24 bulan
     public function index() {
-        $data = $this->Minformasi->getAll();
+        $data = $this->Mstandarbbpblaki->getAll();
 
         echo json_encode([
             'status' => true,
@@ -19,9 +19,9 @@ class Informasi extends CI_Controller {
         ]);
     }
 
-    // GET informasi by ID
+    // GET data standar BB/PB Laki 0-24 bulan by ID
     public function detail($id) {
-        $data = $this->Minformasi->getById($id);
+        $data = $this->Mstandarbbpblaki->getById($id);
 
         if ($data) {
             echo json_encode([
@@ -31,7 +31,7 @@ class Informasi extends CI_Controller {
         } else {
             echo json_encode([
                 'status' => false,
-                'message' => 'Data informasi tidak ditemukan'
+                'message' => 'Data standar BB/PB Laki 0-24 bulan tidak ditemukan'
             ]);
         }
     }

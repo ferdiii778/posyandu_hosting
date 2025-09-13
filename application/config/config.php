@@ -35,7 +35,7 @@ $config['base_url'] = 'https://web-production-18863.up.railway.app/';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
