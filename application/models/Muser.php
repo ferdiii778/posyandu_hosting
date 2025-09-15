@@ -24,4 +24,14 @@ class Muser extends CI_Model {
         $this->db->where('id_user', $id);
         return $this->db->delete('user');
     }
+
+    public function getByUsernameAndPassword($username, $password) {
+        return $this->db
+            ->where('username', $username)
+            ->where('password', $password)
+            ->where('aktif', 1) // hanya user aktif yang bisa login
+            ->get('user')
+            ->row_array();
+    }
+
 }

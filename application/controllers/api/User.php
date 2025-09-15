@@ -61,4 +61,33 @@ class User extends CI_Controller {
             echo json_encode(['status' => false, 'message' => 'Gagal menghapus user']);
         }
     }
+
+    public function login() {
+        $data = json_decode($this->input->raw_input_stream, true);
+    
+        $username = $data['username'] ?? '';
+        $password = $data['password'] ?? '';
+    
+        // hash password pakai md5 biar cocok dengan yang tersimpan
+        $password = md5($password);
+    
+        $user = $this->Muser->getByUsernameAndPassword($username, $password);
+    
+        if ($user) {
+            // hilangkan password dari response biar aman
+            unset($user['password']);
+    
+            echo json_encode([
+                'status' => true,
+                'message' => 'Login berhasil',
+                'data' => $user
+            ]);
+        } else {
+            echo json_encode([
+                'status' => false,
+                'message' => 'Username atau password salah'
+            ]);
+        }
+    }
+
 }
