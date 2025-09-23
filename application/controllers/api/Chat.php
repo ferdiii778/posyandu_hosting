@@ -52,7 +52,9 @@ class Chat extends CI_Controller {
             'id_konsultasi' => $input['id_konsultasi'],
             'dari'          => $input['dari'],
             'untuk'         => $input['untuk'],
-            'isi'           => $input['isi']
+            'isi'           => $input['isi'],
+            'is_deleted'    => 0,
+            'is_edited'     => 0,
         ];
 
         $insert = $this->Mchat->insert($data);
@@ -73,7 +75,7 @@ class Chat extends CI_Controller {
         }
     }
 
-    // UPDATE chat
+    // UPDATE chat (hanya isi, tidak tandai edited)
     public function update($id) {
         $input = json_decode(file_get_contents("php://input"), true);
 
@@ -104,14 +106,58 @@ class Chat extends CI_Controller {
         }
     }
 
-    // DELETE chat
+    // Soft Delete chat (tandai dihapus)
+    public function softDelete($id) {
+        $delete = $this->Mchat->softDelete($id);
+
+        if ($delete) {
+            echo json_encode([
+                'status' => true,
+                'message' => 'Pesan berhasil dihapus'
+            ]);
+        } else {
+            echo json_encode([
+                'status' => false,
+                'message' => 'Gagal menghapus pesan'
+            ]);
+        }
+    }
+
+    // Edit chat (update isi + tandai edited)
+    public function edit($id) {
+        $input = json_decode(file_get_contents("php://input"), true);
+
+        if (!$input || !isset($input['isi'])) {
+            echo json_encode([
+                'status' => false,
+                'message' => 'Input isi tidak boleh kosong'
+            ]);
+            return;
+        }
+
+        $update = $this->Mchat->updateMessage($id, $input['isi']);
+
+        if ($update) {
+            echo json_encode([
+                'status' => true,
+                'message' => 'Pesan berhasil diedit'
+            ]);
+        } else {
+            echo json_encode([
+                'status' => false,
+                'message' => 'Gagal mengedit pesan'
+            ]);
+        }
+    }
+
+    // DELETE chat (hard delete, jarang dipakai kalau sudah ada soft delete)
     public function delete($id) {
         $delete = $this->Mchat->delete($id);
 
         if ($delete) {
             echo json_encode([
                 'status' => true,
-                'message' => 'Chat berhasil dihapus'
+                'message' => 'Chat berhasil dihapus permanen'
             ]);
         } else {
             echo json_encode([
@@ -121,7 +167,7 @@ class Chat extends CI_Controller {
         }
     }
 
-    // Tambahan: GET chat berdasarkan id_konsultasi
+    // GET chat berdasarkan id_konsultasi
     public function byKonsultasi($id_konsultasi) {
         $data = $this->Mchat->getByKonsultasi($id_konsultasi);
 
