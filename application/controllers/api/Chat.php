@@ -56,16 +56,19 @@ class Chat extends CI_Controller {
         ];
 
         $insert = $this->Mchat->insert($data);
-
+        
         if ($insert) {
             echo json_encode([
                 'status' => true,
                 'message' => 'Chat berhasil ditambahkan'
             ]);
         } else {
+            // 🔴 Debug error dari database
+            $error = $this->db->error();
             echo json_encode([
                 'status' => false,
-                'message' => 'Gagal menambahkan chat'
+                'message' => 'Gagal menambahkan chat',
+                'db_error' => $error
             ]);
         }
     }
