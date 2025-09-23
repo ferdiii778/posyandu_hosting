@@ -31,8 +31,100 @@ class Chat extends CI_Controller {
         } else {
             echo json_encode([
                 'status' => false,
-                'message' => 'Data tidak ditemukan'
+                'message' => 'Data chat tidak ditemukan'
             ]);
         }
+    }
+
+    // CREATE chat baru
+    public function create() {
+        $input = json_decode(file_get_contents("php://input"), true);
+
+        if (!$input) {
+            echo json_encode([
+                'status' => false,
+                'message' => 'Input tidak boleh kosong'
+            ]);
+            return;
+        }
+
+        $data = [
+            'id_konsultasi' => $input['id_konsultasi'],
+            'dari'          => $input['dari'],
+            'untuk'         => $input['untuk'],
+            'isi'           => $input['isi']
+        ];
+
+        $insert = $this->Mchat->insert($data);
+
+        if ($insert) {
+            echo json_encode([
+                'status' => true,
+                'message' => 'Chat berhasil ditambahkan'
+            ]);
+        } else {
+            echo json_encode([
+                'status' => false,
+                'message' => 'Gagal menambahkan chat'
+            ]);
+        }
+    }
+
+    // UPDATE chat
+    public function update($id) {
+        $input = json_decode(file_get_contents("php://input"), true);
+
+        if (!$input) {
+            echo json_encode([
+                'status' => false,
+                'message' => 'Input tidak boleh kosong'
+            ]);
+            return;
+        }
+
+        $data = [
+            'isi' => $input['isi']
+        ];
+
+        $update = $this->Mchat->update($id, $data);
+
+        if ($update) {
+            echo json_encode([
+                'status' => true,
+                'message' => 'Chat berhasil diperbarui'
+            ]);
+        } else {
+            echo json_encode([
+                'status' => false,
+                'message' => 'Gagal memperbarui chat'
+            ]);
+        }
+    }
+
+    // DELETE chat
+    public function delete($id) {
+        $delete = $this->Mchat->delete($id);
+
+        if ($delete) {
+            echo json_encode([
+                'status' => true,
+                'message' => 'Chat berhasil dihapus'
+            ]);
+        } else {
+            echo json_encode([
+                'status' => false,
+                'message' => 'Gagal menghapus chat'
+            ]);
+        }
+    }
+
+    // Tambahan: GET chat berdasarkan id_konsultasi
+    public function byKonsultasi($id_konsultasi) {
+        $data = $this->Mchat->getByKonsultasi($id_konsultasi);
+
+        echo json_encode([
+            'status' => true,
+            'data'   => $data
+        ]);
     }
 }

@@ -65,21 +65,30 @@ $route['api/balita/(:any)']['GET'] = 'api/balita/detail/$1';
 $route['api/informasi']['GET'] = 'api/informasi/index';
 $route['api/informasi/(:num)']['GET'] = 'api/informasi/detail/$1';
 
-// Api Jadwal
+// Api Jadwal CRUD
 $route['api/jadwal']['GET'] = 'api/jadwal/index';
 $route['api/jadwal/(:num)']['GET'] = 'api/jadwal/detail/$1';
 
-// Api imunisasi
+// Api imunisasi CRUD
 $route['api/imunisasi']['GET'] = 'api/imunisasi/index';
 $route['api/imunisasi/(:num)']['GET'] = 'api/imunisasi/detail/$1';
+$route['api/imunisasi']['POST'] = 'api/imunisasi/store';
+$route['api/imunisasi/(:num)']['PUT'] = 'api/imunisasi/update/$1';
+$route['api/imunisasi/(:num)']['DELETE'] = 'api/imunisasi/delete/$1';
 
-// Api Vitamin
+// Api Vitamin CRUD
 $route['api/vitamin']['GET'] = 'api/vitamin/index';
 $route['api/vitamin/(:num)']['GET'] = 'api/vitamin/detail/$1';
+$route['api/vitamin']['POST'] = 'api/vitamin/store';
+$route['api/vitamin/(:num)']['PUT'] = 'api/vitamin/update/$1';
+$route['api/vitamin/(:num)']['DELETE'] = 'api/vitamin/delete/$1';
 
-// Api Kematian
+// Api Kematian CRUD
 $route['api/kematian']['GET'] = 'api/kematian/index';
 $route['api/kematian/(:num)']['GET'] = 'api/kematian/detail/$1';
+$route['api/kematian']['POST'] = 'api/kematian/store';
+$route['api/kematian/(:num)']['PUT'] = 'api/kematian/update/$1';
+$route['api/kematian/(:num)']['DELETE'] = 'api/kematian/delete/$1';
 
 // Api konsultasi
 $route['api/konsultasi']['GET'] = 'api/konsultasi/index';
