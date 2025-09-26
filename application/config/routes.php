@@ -58,11 +58,11 @@ $route['api/chat']['GET'] = 'api/chat/index';
 $route['api/chat/(:num)']['GET'] = 'api/chat/detail/$1';
 
 // Api Balita
-$route['api/balita']['GET'] = 'balita/index';
-$route['api/balita']['POST'] = 'balita/create';
-$route['api/balita/(:any)']['GET'] = 'balita/detail/$1';
-$route['api/balita/(:any)']['PUT'] = 'balita/update/$1';
-$route['api/balita/(:any)']['DELETE'] = 'balita/delete/$1';
+$route['api/balita']['GET'] = 'api/balita/index';
+$route['api/balita']['POST'] = 'api/balita/create';
+$route['api/balita/(:any)']['GET'] = 'api/balita/detail/$1';
+$route['api/balita/(:any)']['PUT'] = 'api/balita/update/$1';
+$route['api/balita/(:any)']['DELETE'] = 'api/balita/delete/$1';
 
 // Api Informasi
 $route['api/informasi']['GET'] = 'api/informasi/index';
