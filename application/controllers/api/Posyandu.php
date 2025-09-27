@@ -10,7 +10,7 @@ class Posyandu extends CI_Controller {
 
     // GET semua posyandu
     public function index() {
-        $data = $this->db->get('posyandu')->result_array();
+        $data = $this->db->get('ref_posyandu')->result_array();
 
         echo json_encode([
             'status' => true,
@@ -20,12 +20,18 @@ class Posyandu extends CI_Controller {
 
     // GET posyandu by ID
     public function detail($id) {
-        $data = $this->db->get_where('posyandu', ['id_posyandu' => $id])->row_array();
+        $data = $this->db->get_where('ref_posyandu', ['posyandu_id' => $id])->row_array();
 
         if ($data) {
-            echo json_encode(['status' => true, 'data' => $data]);
+            echo json_encode([
+                'status' => true,
+                'data'   => $data
+            ]);
         } else {
-            echo json_encode(['status' => false, 'message' => 'Data posyandu tidak ditemukan']);
+            echo json_encode([
+                'status'  => false,
+                'message' => 'Data posyandu tidak ditemukan'
+            ]);
         }
     }
 }

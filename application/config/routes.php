@@ -158,8 +158,8 @@ $route['api/ref-standar-imt-u-5-18-perempuan']['GET'] = 'api/standarimtu518perem
 $route['api/ref-standar-imt-u-5-18-perempuan/(:num)']['GET'] = 'api/standarimtu518perempuan/detail/$1';
 
 // Api Posyandu
-$route['api/posyandu'] = 'posyandu/index';
-$route['api/posyandu/(:num)'] = 'posyandu/detail/$1';
+$route['api/posyandu'] = 'api/posyandu/index';
+$route['api/posyandu/(:num)'] = 'api/posyandu/detail/$1';
 
 // Api User Auth
 $route['api/user']['GET'] = 'api/user/index';
