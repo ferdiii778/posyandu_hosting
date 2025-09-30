@@ -31,4 +31,5 @@ class Mkematian extends CI_Model {
         $this->db->where('id_kematian', $id);
         return $this->db->delete($this->table);
     }
+
 }
