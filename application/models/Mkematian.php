@@ -3,22 +3,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Mkematian extends CI_Model {
 
-    private $table = 'kematian'; // tabel di database
+    private $table = 'kematian'; // ← ubah jadi 'kematian' sesuai tabel aslinya
 
-    // Ambil semua data kematian
+    // Ambil semua data kematian + join tabel balita
     public function getAll() {
-        $this->db->select('data_kematian.*, balita.nama_balita, balita.nama_ibu, balita.tgl_lahir');
-        $this->db->from('data_kematian');
-        $this->db->join('balita', 'balita.nib = data_kematian.nib', 'left');
+        $this->db->select('kematian.*, balita.nama_balita, balita.nama_ibu, balita.tgl_lahir');
+        $this->db->from($this->table);
+        $this->db->join('balita', 'balita.nib = kematian.nib', 'left');
         return $this->db->get()->result();
     }
-        
-    // Ambil semua data menggunakan id
+
+    // Ambil data kematian berdasarkan ID + join tabel balita
     public function getById($id) {
-        $this->db->select('data_kematian.*, balita.nama_balita, balita.nama_ibu, balita.tgl_lahir');
-        $this->db->from('data_kematian');
-        $this->db->join('balita', 'balita.nib = data_kematian.nib', 'left');
-        $this->db->where('data_kematian.id_kematian', $id);
+        $this->db->select('kematian.*, balita.nama_balita, balita.nama_ibu, balita.tgl_lahir');
+        $this->db->from($this->table);
+        $this->db->join('balita', 'balita.nib = kematian.nib', 'left');
+        $this->db->where('kematian.id_kematian', $id);
         return $this->db->get()->row();
     }
 
@@ -38,5 +38,4 @@ class Mkematian extends CI_Model {
         $this->db->where('id_kematian', $id);
         return $this->db->delete($this->table);
     }
-
 }
