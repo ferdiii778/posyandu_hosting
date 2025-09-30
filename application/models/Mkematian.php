@@ -7,12 +7,19 @@ class Mkematian extends CI_Model {
 
     // Ambil semua data kematian
     public function getAll() {
-        return $this->db->get($this->table)->result();
+        $this->db->select('data_kematian.*, balita.nama_balita, balita.nama_ibu, balita.tgl_lahir');
+        $this->db->from('data_kematian');
+        $this->db->join('balita', 'balita.nib = data_kematian.nib', 'left');
+        return $this->db->get()->result();
     }
-
-    // Ambil data kematian berdasarkan ID
+        
+    // Ambil semua data menggunakan id
     public function getById($id) {
-        return $this->db->get_where($this->table, ['id_kematian' => $id])->row();
+        $this->db->select('data_kematian.*, balita.nama_balita, balita.nama_ibu, balita.tgl_lahir');
+        $this->db->from('data_kematian');
+        $this->db->join('balita', 'balita.nib = data_kematian.nib', 'left');
+        $this->db->where('data_kematian.id_kematian', $id);
+        return $this->db->get()->row();
     }
 
     // Tambah data kematian
