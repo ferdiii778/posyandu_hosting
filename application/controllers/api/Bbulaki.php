@@ -5,7 +5,7 @@ class Bbulaki extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('Mbbulaki');
+        $this->load->model('modelsapi/Mbbulaki');
         header('Content-Type: application/json');
     }
 

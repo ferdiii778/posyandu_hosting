@@ -5,7 +5,7 @@ class Chat extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('Mchat');
+        $this->load->model('modelsapi/Mchat');
         header('Content-Type: application/json');
     }
 

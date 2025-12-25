@@ -5,7 +5,7 @@ class Pbuperempuan extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('Mpbuperempuan');
+        $this->load->model('modelsapi/Mpbuperempuan');
         header('Content-Type: application/json');
     }
 

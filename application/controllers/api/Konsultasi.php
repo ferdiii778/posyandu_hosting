@@ -5,7 +5,7 @@ class Konsultasi extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('Mkonsultasi');
+        $this->load->model('modelsapi/Mkonsultasi');
         header('Content-Type: application/json');
     }
 

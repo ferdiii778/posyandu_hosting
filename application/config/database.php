@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
     'dsn'      => '',
-    'hostname' => 'trolley.proxy.rlwy.net',
-    'username' => 'root',
-    'password' => 'qdNmEwdWgwvhdTKAUfvBDRzsjegbhMFb',
-    'database' => 'railway',
+    'hostname' => getenv('MYSQLHOST'),
+    'username' => getenv('MYSQLUSER'),
+    'password' => getenv('MYSQLPASSWORD'),
+    'database' => getenv('MYSQLDATABASE'),
     'dbdriver' => 'mysqli',
     'port'     => 45450, // sesuai dengan URL Railway
     'dbprefix' => '',

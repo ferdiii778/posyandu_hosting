@@ -5,7 +5,7 @@ class Ortubayi extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('Mortubayi');
+        $this->load->model('modelsapi/Mortubayi');
         header('Content-Type: application/json');
     }
 

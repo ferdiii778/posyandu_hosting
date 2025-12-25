@@ -5,7 +5,7 @@ class Standarimtu024laki extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('Mstandarimtu024laki');
+        $this->load->model('modelsapi/Mstandarimtu024laki');
         header('Content-Type: application/json');
     }
 

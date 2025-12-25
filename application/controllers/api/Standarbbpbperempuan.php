@@ -5,7 +5,7 @@ class Standarbbpbperempuan extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('Mstandarbbpbperempuan');
+        $this->load->model('modelsapi/Mstandarbbpbperempuan');
         header('Content-Type: application/json');
     }
 

@@ -5,7 +5,7 @@ class Imunisasi extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('Mimunisasi');
+        $this->load->model('modelsapi/Mimunisasi');
         header('Content-Type: application/json');
     }
 
