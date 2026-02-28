@@ -75,12 +75,12 @@ $query_builder = TRUE;
 
 $db['default'] = array(
     'dsn'      => '',
-    'hostname' => 'maglev.proxy.rlwy.net',
-    'username' => 'root',
-    'password' => 'rSPkExKBQNclyUynbtXRxMtewTpWPNxD',
-    'database' => 'railway',
+    'hostname' => getenv('MYSQLHOST'),
+    'username' => getenv('MYSQLUSER'),
+    'password' => getenv('MYSQLPASSWORD'),
+    'database' => getenv('MYSQLDATABASE'),
     'dbdriver' => 'mysqli',
-    'port'     => 12130, // sesuai dengan URL Railway
+    'port'     => 3306, // sesuai dengan URL Railway
     'dbprefix' => '',
     'pconnect' => FALSE,
     'db_debug' => (ENVIRONMENT !== 'production'),
