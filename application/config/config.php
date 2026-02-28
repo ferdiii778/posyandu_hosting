@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'https://web-production-18863.up.railway.app/';
+$config['base_url'] = 'https://web-production-8a9c9.up.railway.app/';
 
 /*
 |--------------------------------------------------------------------------
