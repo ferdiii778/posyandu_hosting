@@ -5,34 +5,40 @@ class Mbalita extends CI_Model {
 
     private $table = 'balita';
 
+	private function baseQueryBalita()
+	{
+	    $this->db->select('b.*, ot.nama as nama_orangtua, ot.username, rp.posyandu_nama');
+	    $this->db->from('balita b');
+	
+	    // ✅ Ambil 1 orang tua per NIB (mengganti GROUP BY yg bikin error ONLY_FULL_GROUP_BY)
+	    $this->db->join('(
+	        SELECT nib, MIN(id_orang_tua) AS id_orang_tua
+	        FROM ortu_bayi
+	        GROUP BY nib
+	    ) ob', 'b.nib = ob.nib', 'left', false);
+	
+	    $this->db->join('orang_tua ot', 'ob.id_orang_tua = ot.id_orang_tua', 'left');
+	    $this->db->join('ref_posyandu rp', 'b.posyandu_id = rp.posyandu_id', 'left');
+	}
+
     // =====================================
     // 👶 AMBIL SEMUA BALITA (ADMIN)
     // =====================================
     public function getAll() {
-        $this->db->select('b.*, ot.nama as nama_orangtua, ot.username, rp.posyandu_nama');
-        $this->db->from('balita b');
-        $this->db->join('ortu_bayi ob', 'b.nib = ob.nib', 'left');
-        $this->db->join('orang_tua ot', 'ob.id_orang_tua = ot.id_orang_tua', 'left');
-        $this->db->join('ref_posyandu rp', 'b.posyandu_id = rp.posyandu_id', 'left');
-        $this->db->group_by('b.nib');
-        return $this->db->get()->result_array();
-    }
+	    $this->baseQueryBalita();
+	    return $this->db->get()->result_array();
+	}
 
 
     // =============================================
     // 🔍 AMBIL BALITA BERDASARKAN POSYANDU (KADER)
     // =============================================
     public function getByPosyandu($posyandu_id)
-    {
-        $this->db->select('b.*, ot.nama as nama_orangtua, ot.username, rp.posyandu_nama');
-        $this->db->from('balita b');
-        $this->db->join('ortu_bayi ob', 'b.nib = ob.nib', 'left');
-        $this->db->join('orang_tua ot', 'ob.id_orang_tua = ot.id_orang_tua', 'left');
-        $this->db->join('ref_posyandu rp', 'b.posyandu_id = rp.posyandu_id', 'left');
-        $this->db->where('b.posyandu_id', $posyandu_id);
-        $this->db->group_by('b.nib');
-        return $this->db->get()->result_array();
-    }
+	{
+	    $this->baseQueryBalita();
+	    $this->db->where('b.posyandu_id', $posyandu_id);
+	    return $this->db->get()->result_array();
+	}
 
 
     // ======================================
