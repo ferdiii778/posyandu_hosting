@@ -13,75 +13,74 @@ class Mbumil extends CI_Model
     }
 
     // ✅ Ambil semua data ibu hamil
-    public function get_all()
-    {
-        $this->db->select('
-            b.bumil_id,
-            b.posyandu_id,
-            p.nama_posyandu AS nama_posyandu,
-            b.bumil_nama,
-            b.bumil_ttl,
-            b.bumil_nik,
-            b.bumil_no_jkn,
-            b.bumil_goldar,
-            b.bumil_faskes1,
-            b.bumil_faskes_rujukan,
-            b.bumil_pendidikan,
-            b.bumil_pekerjaan,
-            b.bumil_telp,
-            b.bumil_alamat,
-            b.bumil_asuransi_lain,
-            b.bumil_asuransi_lain_no,
-            b.bumil_asuransi_lain_tgl_aktif,
-            b.bumil_puskesmas_domisili,
-            b.bumil_no_kohort1_ibu,
-            b.bumil_no_kohort1_bayi,
-            b.bumil_no_kohort1_balita,
-            b.bumil_no_catatan_medik,
-            b.bumil_anak_ke,
-            b.bumil_tgl_input
-        ');
-        $this->db->from($this->table . ' b');
-        $this->db->join('ref_posyandu p', 'b.posyandu_id = p.posyandu_id', 'left');
-        $this->db->order_by('b.bumil_id', 'DESC');
-        return $this->db->get()->result();
-    }
-
-    // ✅ Ambil data berdasarkan ID
-    public function get_by_id($id)
-    {
-        $this->db->select('
-            b.bumil_id,
-            b.posyandu_id,
-            p.nama_posyandu AS nama_posyandu,
-            b.bumil_nama,
-            b.bumil_ttl,
-            b.bumil_nik,
-            b.bumil_no_jkn,
-            b.bumil_goldar,
-            b.bumil_faskes1,
-            b.bumil_faskes_rujukan,
-            b.bumil_pendidikan,
-            b.bumil_pekerjaan,
-            b.bumil_telp,
-            b.bumil_alamat,
-            b.bumil_asuransi_lain,
-            b.bumil_asuransi_lain_no,
-            b.bumil_asuransi_lain_tgl_aktif,
-            b.bumil_puskesmas_domisili,
-            b.bumil_no_kohort1_ibu,
-            b.bumil_no_kohort1_bayi,
-            b.bumil_no_kohort1_balita,
-            b.bumil_no_catatan_medik,
-            b.bumil_anak_ke,
-            b.bumil_tgl_input
-        ');
-        $this->db->from($this->table . ' b');
-        $this->db->join('ref_posyandu p', 'b.posyandu_id = p.posyandu_id', 'left');
-        $this->db->where('b.' . $this->primaryKey, $id);
-        return $this->db->get()->row();
-    }
-
+	public function get_all()
+	{
+	    $this->db->select('
+	        b.bumil_id,
+	        b.posyandu_id,
+	        p.posyandu_nama AS nama_posyandu,
+	        b.bumil_nama,
+	        b.bumil_ttl,
+	        b.bumil_nik,
+	        b.bumil_no_jkn,
+	        b.bumil_goldar,
+	        b.bumil_faskes1,
+	        b.bumil_faskes_rujukan,
+	        b.bumil_pendidikan,
+	        b.bumil_pekerjaan,
+	        b.bumil_telp,
+	        b.bumil_alamat,
+	        b.bumil_asuransi_lain,
+	        b.bumil_asuransi_lain_no,
+	        b.bumil_asuransi_lain_tgl_aktif,
+	        b.bumil_puskesmas_domisili,
+	        b.bumil_no_kohort1_ibu,
+	        b.bumil_no_kohort1_bayi,
+	        b.bumil_no_kohort1_balita,
+	        b.bumil_no_catatan_medik,
+	        b.bumil_anak_ke,
+	        b.bumil_tgl_input
+	    ');
+	    $this->db->from($this->table . ' b');
+	    $this->db->join('ref_posyandu p', 'b.posyandu_id = p.posyandu_id', 'left');
+	    $this->db->order_by('b.bumil_id', 'DESC');
+	    return $this->db->get()->result();
+	}
+	
+	// ✅ Ambil data berdasarkan ID
+	public function get_by_id($id)
+	{
+	    $this->db->select('
+	        b.bumil_id,
+	        b.posyandu_id,
+	        p.posyandu_nama AS nama_posyandu,
+	        b.bumil_nama,
+	        b.bumil_ttl,
+	        b.bumil_nik,
+	        b.bumil_no_jkn,
+	        b.bumil_goldar,
+	        b.bumil_faskes1,
+	        b.bumil_faskes_rujukan,
+	        b.bumil_pendidikan,
+	        b.bumil_pekerjaan,
+	        b.bumil_telp,
+	        b.bumil_alamat,
+	        b.bumil_asuransi_lain,
+	        b.bumil_asuransi_lain_no,
+	        b.bumil_asuransi_lain_tgl_aktif,
+	        b.bumil_puskesmas_domisili,
+	        b.bumil_no_kohort1_ibu,
+	        b.bumil_no_kohort1_bayi,
+	        b.bumil_no_kohort1_balita,
+	        b.bumil_no_catatan_medik,
+	        b.bumil_anak_ke,
+	        b.bumil_tgl_input
+	    ');
+	    $this->db->from($this->table . ' b');
+	    $this->db->join('ref_posyandu p', 'b.posyandu_id = p.posyandu_id', 'left');
+	    $this->db->where('b.' . $this->primaryKey, $id);
+	    return $this->db->get()->row();
+	}
     // ✅ Tambah data ibu hamil
     public function insert($data)
     {
