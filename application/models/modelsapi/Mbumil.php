@@ -18,7 +18,7 @@ class Mbumil extends CI_Model
         $this->db->select('
             b.bumil_id,
             b.posyandu_id,
-            p.nama_posyandu,
+            p.nama_posyandu AS nama_posyandu,
             b.bumil_nama,
             b.bumil_ttl,
             b.bumil_nik,
@@ -53,7 +53,7 @@ class Mbumil extends CI_Model
         $this->db->select('
             b.bumil_id,
             b.posyandu_id,
-            p.nama_posyandu,
+            p.nama_posyandu AS nama_posyandu,
             b.bumil_nama,
             b.bumil_ttl,
             b.bumil_nik,
