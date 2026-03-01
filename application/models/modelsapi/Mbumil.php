@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class BumilModel extends CI_Model
+class Mbumil extends CI_Model
 {
     private $table = 'bumil';
     private $primaryKey = 'bumil_id';
