@@ -1,21 +1,26 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class posyandu extends CI_Controller
+class Posyandu extends CI_Controller
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->load->database();
-        $this->load->model('modelsapi/Mposyandu');
-        
-        // Catatan: Untuk API, sebaiknya tambahkan header CORS agar bisa diakses mobile
+
+        // ✅ load master model sebagai "mm" (ini yang hilang)
+        $this->load->model('modelsapi/Mmaster', 'mm');
+
+        // ✅ alias biar konsisten dipanggil $this->Mposyandu
+        $this->load->model('modelsapi/Mposyandu', 'Mposyandu');
+
         header('Content-Type: application/json');
         header('Access-Control-Allow-Origin: *');
-        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Authorization');
     }
 
-    // Mendapatkan semua data Posyandu (Method: GET)
+    // Mendapatkan semua data Posyandu (GET)
     public function index()
     {
         $preload_posyandu = array(
@@ -24,95 +29,99 @@ class posyandu extends CI_Controller
                 array('ref_kecamatan', 'ref_kecamatan.kecamatan_id = ref_desa.kecamatan_id', 'left'),
             ),
         );
-        
-        // Menggunakan library mm (Master Model) sesuai kode asli anda
+
+        // ✅ sekarang $this->mm sudah ada
         $data = $this->mm->get('ref_posyandu', $preload_posyandu);
 
         echo json_encode([
-            'status' => 'success',
+            'status' => true,
             'message' => 'Data Posyandu berhasil diambil',
             'data' => $data
         ]);
     }
 
-    // Menampilkan daftar desa untuk dropdown di mobile
+    // Dropdown desa (GET)
     public function get_desa()
     {
-        // Mengambil data desa dari tabel ref_desa
         $desa = $this->db->get('ref_desa')->result_array();
-        
+
         echo json_encode([
-            'status' => 'success',
+            'status' => true,
             'data' => $desa
         ]);
     }
 
-    // Menambah data Posyandu (Method: POST)
+    // Tambah posyandu (POST)
     public function insert_action()
     {
-        // Mengambil input JSON atau Post
         $input = json_decode(file_get_contents('php://input'), true);
-        if(empty($input)) $input = $this->input->post();
+        if (empty($input)) $input = $this->input->post();
 
         $data = [
-            'posyandu_nama'           => $input['posyandu_nama'],
-            'desa_id'                 => $input['desa_id'],
-            'posyandu_ketua'          => $input['posyandu_ketua'],
-            'posyandu_telp'           => $input['posyandu_telp'],
-            'posyandu_admin_apk'      => $input['posyandu_admin_apk'],
-            'posyandu_telp_admin_apk' => $input['posyandu_telp_admin_apk'],
-            'posyandu_alamat'         => $input['posyandu_alamat'],
+            'posyandu_nama'           => $input['posyandu_nama'] ?? null,
+            'desa_id'                 => $input['desa_id'] ?? null,
+            'posyandu_ketua'          => $input['posyandu_ketua'] ?? null,
+            'posyandu_telp'           => $input['posyandu_telp'] ?? null,
+            'posyandu_admin_apk'      => $input['posyandu_admin_apk'] ?? null,
+            'posyandu_telp_admin_apk' => $input['posyandu_telp_admin_apk'] ?? null,
+            'posyandu_alamat'         => $input['posyandu_alamat'] ?? null,
         ];
 
-        $insert = $this->Mposyandu->insert($data);
-        
+        $this->Mposyandu->insert($data);
+
         echo json_encode([
-            'status' => 'success',
+            'status' => true,
             'message' => 'Berhasil tambah data posyandu.'
         ]);
     }
 
-    // Mengambil satu data spesifik (Method: GET)
+    // Detail posyandu (GET)
     public function detail($id)
     {
         $data = $this->Mposyandu->get_by_id($id);
         if ($data) {
-            echo json_encode(['status' => 'success', 'data' => $data]);
+            echo json_encode(['status' => true, 'data' => $data]);
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'Data tidak ditemukan'], 404);
+            echo json_encode(['status' => false, 'message' => 'Data tidak ditemukan']);
         }
     }
 
-    // Mengedit data (Method: POST atau PUT)
+    // Edit posyandu (POST/PUT)
     public function edit_action()
     {
         $input = json_decode(file_get_contents('php://input'), true);
-        if(empty($input)) $input = $this->input->post();
+        if (empty($input)) $input = $this->input->post();
 
-        $posyandu_id = $input['posyandu_id'];
+        $posyandu_id = $input['posyandu_id'] ?? null;
+        if (!$posyandu_id) {
+            echo json_encode(['status' => false, 'message' => 'posyandu_id wajib diisi']);
+            return;
+        }
+
         $data = [
-            'posyandu_nama'           => $input['posyandu_nama'],
-            'posyandu_telp'           => $input['posyandu_telp'],
-            'posyandu_alamat'         => $input['posyandu_alamat'],
-            'posyandu_ketua'          => $input['posyandu_ketua'],
-            'posyandu_admin_apk'      => $input['posyandu_admin_apk'],
-            'posyandu_telp_admin_apk' => $input['posyandu_telp_admin_apk'],
-            'desa_id'                 => $input['desa_id'],
+            'posyandu_nama'           => $input['posyandu_nama'] ?? null,
+            'posyandu_telp'           => $input['posyandu_telp'] ?? null,
+            'posyandu_alamat'         => $input['posyandu_alamat'] ?? null,
+            'posyandu_ketua'          => $input['posyandu_ketua'] ?? null,
+            'posyandu_admin_apk'      => $input['posyandu_admin_apk'] ?? null,
+            'posyandu_telp_admin_apk' => $input['posyandu_telp_admin_apk'] ?? null,
+            'desa_id'                 => $input['desa_id'] ?? null,
         ];
 
         $this->Mposyandu->update($posyandu_id, $data);
-        echo json_encode(['status' => 'success', 'message' => 'Berhasil edit data posyandu.']);
+
+        echo json_encode(['status' => true, 'message' => 'Berhasil edit data posyandu.']);
     }
 
-    // Menghapus data (Method: DELETE atau GET)
+    // Hapus posyandu (DELETE/GET)
     public function delete($id)
     {
         $data = $this->Mposyandu->get_by_id($id);
         if ($data) {
             $this->Mposyandu->delete($id);
-            echo json_encode(['status' => 'success', 'message' => 'Berhasil hapus data.']);
+            echo json_encode(['status' => true, 'message' => 'Berhasil hapus data.']);
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'Data tidak ditemukan.']);
+            echo json_encode(['status' => false, 'message' => 'Data tidak ditemukan.']);
         }
     }
 }
