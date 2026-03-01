@@ -103,7 +103,7 @@ class penanganan extends CI_Controller
                 'where' => $where_role, // Masukkan filter di sini
                 'order' => 'treatment.treatment_id desc'
             );
-            $list = $this->mm->get('treatment', $preload);
+            $list = $this->Mpenanganan->get('treatment', $preload);
             $this->_response(['status' => true, 'data' => $list]);
         }
     }
@@ -150,7 +150,7 @@ class penanganan extends CI_Controller
         $update_data['treatment_status'] = 'Sudah';
 
         $where = array('where' => array('treatment_id' => $id));
-        $update = $this->mm->save('treatment', $update_data, $where); 
+        $update = $this->Mpenanganan->save('treatment', $update_data, $where); 
 
         if ($update) {
             $this->_response(['status' => true, 'message' => 'Data berhasil diperbarui']);
