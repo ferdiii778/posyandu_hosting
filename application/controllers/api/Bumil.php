@@ -4,12 +4,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Bumil extends CI_Controller
 {
     public function __construct()
-    {
-        parent::__construct();
-        $this->load->model('modelsapi/Mbumil');
-        $this->load->database();
-        header('Content-Type: application/json');
-    }
+	{
+	    parent::__construct();
+	    $this->load->database();
+	
+	    // ✅ alias supaya bisa dipakai: $this->BumilModel
+	    $this->load->model('modelsapi/Mbumil', 'BumilModel');
+	
+	    header('Content-Type: application/json');
+	}
 
     // --------------------------
     // ?? Helper functions
