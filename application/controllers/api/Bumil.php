@@ -6,7 +6,7 @@ class Bumil extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('BumilModel');
+        $this->load->model('modelsapi/Mbumil');
         $this->load->database();
         header('Content-Type: application/json');
     }
